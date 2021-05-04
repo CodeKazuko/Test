@@ -78,9 +78,9 @@ router.get(
   asyncHandler(async (req, res) => {
     try {
       const user = new User({
-        name: 'Basir',
-        email: 'basir.jafarzadeh@gmail.com',
-        password: '1234',
+        name: 'Admin',
+        email: 'admin@example.com',
+        password: 'jsamazona',
         isAdmin: true,
       });
       const newUser = await user.save()
