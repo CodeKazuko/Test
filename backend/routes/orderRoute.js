@@ -12,7 +12,7 @@ router.get(
   '/',
   isAuth,
   asyncHandler(async (req, res) => {
-    const orders = await Order.find({})// .populate('user')
+    const orders = await Order.find({}).populate('user')
     res.send(orders)
   })
 )
