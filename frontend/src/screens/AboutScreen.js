@@ -2,7 +2,7 @@ const AboutScreen = {
   render: async () => {
     const view = /* html */ `
             <section class="section">
-                <h1> About Me 1 </h1>
+                <h1> About Me </h1>
             </section>
         `
     return view

@@ -1,6 +1,5 @@
 const Aside = {
   render: async () => {
-    
    // filter by category
     return `
    <div class="aside-header">
@@ -20,14 +19,12 @@ const Aside = {
         </a>
       </li> 
     </ul>
-  </div>`;
+  </div>`
   },
   after_render: async () => {
-    document.getElementById('aside_container').classList.remove('open');
-    document
-      .getElementById('aside-close-button')
-      .addEventListener('click', async () => {
-        document.getElementById('aside_container').classList.remove('open');
+    document.getElementById('aside_container').classList.remove('open')
+    document.getElementById('aside-close-button').addEventListener('click', async () => {
+        document.getElementById('aside_container').classList.remove('open')
       });
   },
 };

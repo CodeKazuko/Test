@@ -7,14 +7,9 @@ import { getUserInfo } from '../localStorage.js'
 const ProductScreen = {
   after_render: async () => {
     const request = parseRequestUrl()
-    const btnAdd = document.querySelector('add-button')
-    btnAdd.addEventListener('click', () => {
-    //  if (product.countInStock <= 0) btnAdd.disabled = true
-    //  else {
-    //  btnAdd.disabled = false}
+    document.getElementById('add-button').addEventListener('click', () => {
       document.location.hash = `/cart/${request.id}`
-    })
-
+    });
     if (document.getElementById('review-form')) {
       document.getElementById('review-form').addEventListener('submit', 
       async (e) => {
@@ -78,10 +73,13 @@ const ProductScreen = {
                 </li>
                 <li>
                   Status:  
-                   ${product.countInStock > 0 ? 'In Stock' : 'Unavailable'}
+                   ${product.countInStock > 0 ? 'In Stock' : 'Unavailable.'}
                 </li>              
                 <li>
-                <button id="add-button" class="primary"> 
+                <button
+                id="add-button"
+                class="primary"
+                >
                 Add to Cart
                 </button>
                 </li>
@@ -92,7 +90,9 @@ const ProductScreen = {
           <div> 
             <h2>Reviews</h2>
             ${
-              product.reviews.length === 0 ? `<div>There is no review.</div>`  : ''
+              product.reviews.length === 0
+                ? `<div>There is no review.</div>`
+                : ''
             }
             <ul class="review">
               ${product.reviews
@@ -111,11 +111,14 @@ const ProductScreen = {
                     <div>
                     ${review.comment}
                     </div>
-                  </li>`).join('\n')}
+                  </li>`
+                ).join('\n')}
               <li>
                 <h3>Write a customer reviews</h3>
 
-                ${userInfo.name ? `<form id="review-form">
+                ${
+                  userInfo.name
+                    ? `<form id="review-form">
                       <ul class="form-container">
                         <li>
                           <label for="rating">Rating</label>
@@ -136,7 +139,10 @@ const ProductScreen = {
                           <button type="submit" class="primary">Submit</button>
                         </li>
                       </ul>
-                    </form>` : ` <div>Please <a href="/#/signin">Signin</a> to write a review. </div>`
+                    </form>`
+                    : ` <div>
+                      Please <a href="/#/signin">Signin</a> to write a review.
+                    </div>`
                 }
               </li>
             </ul> 
