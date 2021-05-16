@@ -11,7 +11,7 @@ const getToken = (user) => {
     },
     config.JWT_SECRET,
     {
-      expiresIn: '12h',
+      expiresIn: '1h',
     }
   )
 }
