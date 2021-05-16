@@ -74,7 +74,7 @@ button.primary {
 }
 header {
   grid-area: header;
-  background-color: #203040;
+  background-color: #469f70;
   color: #ffffff;
   display: flex;
   justify-content: space-between;
