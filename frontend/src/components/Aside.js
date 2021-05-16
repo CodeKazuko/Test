@@ -1,5 +1,6 @@
 const Aside = {
   render: async () => {
+    
    // filter by category
     return `
    <div class="aside-header">
