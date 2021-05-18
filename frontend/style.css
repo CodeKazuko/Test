@@ -677,7 +677,7 @@ form.example input[type='text'] {
 }
 .dashboard-menu li.selected a {
   background-color: #c0c0c0;
-  color: #c45500;
+  color: #0139c0;
 }
 .dashboard-content {
   flex: 4 1 80rem;
