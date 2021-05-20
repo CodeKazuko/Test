@@ -31,6 +31,22 @@ const RegisterScreen = {
   },
   render: () => `
   <script type="text/javascript"> 
+  function matchTest(){
+    let password = document.querySelector('password').value
+    let confirmPassword = document.querySelector('re-password').value
+    
+    if(password !== confirmPassword){
+      console.log("Password don't match. Please try again.")
+      return false
+    }
+    else if(password === confirmPassword){
+      console.log("Password match")
+    }
+  }
+  repeatPassword.addEventListener("onkeyup", (e) => {
+    matchTest()
+   })
+
   window.onload = function() {
   let email = document.getElementById("email")
   let password = document.getElementById("password")
@@ -71,19 +87,6 @@ const RegisterScreen = {
          alert("Your Password is invalid")
     }
   })   
-
-  function matchTest(){
-    let password = document.querySelector('password').value
-    let confirmPassword = document.querySelector('re-password').value
-    
-    if(password != confirmPassword)
-      alert("Password don't match. Please try again.")
-      return false
-    }
-    else if(password == confirmPassword){
-      alert("Password match")
-    }
-  }
 }
 </script>    
       <div class="form">
@@ -115,7 +118,6 @@ const RegisterScreen = {
                 id="password"
                 name="password"
                 required        
-                onkeyup="matchTest()"
                 />
             </li>
             <li>
@@ -124,6 +126,7 @@ const RegisterScreen = {
                 type="password"
                 id="re-password"
                 name="re-password"
+                onkeyup="matchTest()"
                 required            
                 />
             </li>
