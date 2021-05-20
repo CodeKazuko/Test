@@ -33,58 +33,56 @@ const RegisterScreen = {
           <script type="text/javascript"> 
           window.onload = function() {
             let email = document.getElementById("email");
-            let password = document.getElementById("password");
-            let repeatPassword = document.getElementById("re-password");
-          
             email.addEventListener("input", () => {
-              let emailBox = document.querySelector(".emailBox");
-              let emailText = document.querySelector(".emailText");
-              const emailPattern = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$/;
+              let emailBox = document.querySelector(".emailBox")
+              let emailText = document.querySelector(".emailText")
+              const emailPattern = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$/
           
               if (email.value.match(emailPattern)) {
-                emailBox.classList.add("valid");
-                emailBox.classList.remove("invalid");
-                emailText.innerHTML = "Your Email Address in Valid";
+                emailBox.classList.add("valid")
+                emailBox.classList.remove("invalid")
+                emailText.innerHTML = "Your Email Address in Valid"
               } else {
-                emailBox.classList.add("invalid");
-                emailBox.classList.remove("valid");
-                emailText.innerHTML = "Must be a valid email address.";
+                emailBox.classList.add("invalid")
+                emailBox.classList.remove("valid")
+                emailText.innerHTML = "Must be a valid email address."
               }
             });
           
             password.addEventListener("input", () => {
-              let passBox = document.querySelector(".passBox");
-              let passText = document.querySelector(".passText");
-              const passPattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+              let passBox = document.querySelector(".passBox")
+              let passText = document.querySelector(".passText")
+              const passPattern = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
           
               if (password.value.match(passPattern)) {
-                passBox.classList.add("valid");
-                passBox.classList.remove("invalid");
-                passText.innerHTML = "Your Password in Valid";
+                passBox.classList.add("valid")
+                passBox.classList.remove("invalid")
+                passText.innerHTML = "Your Password in Valid"
               } else {
-                passBox.classList.add("invalid");
-                passBox.classList.remove("valid");
+                passBox.classList.add("invalid")
+                passBox.classList.remove("valid")
                 passText.innerHTML =
-                  "Your password must be at least 8 characters as well as contain at least one uppercase, one lowercase, and one number.";
+                  "Your password must be at least 8 characters as well as contain at least one uppercase, one lowercase, and one number."
               }
-            });
-          
-            function matchTest() {
+            })
+          }
+           function matchTest() {
+              let password = document.getElementById("password")
+              let passText = document.querySelector(".passText")
               let pass = password.value
               let confirmPass = repeatPassword.value
           
               if (pass !== confirmPass) {
-                console.log("Password don't match. Please try again.")
-                return false;
+                passText.innerHTML = "Your Password dnt match"
+                return false
               } else {
-                console.log("Password match")
+                passText.innerHTML = "Your Password match"
               }
             }
-          
+            let repeatPassword = document.getElementById("re-password")
             repeatPassword.addEventListener("keyup", (e) => {
               matchTest()
-            })
-          }
+          })
         </script>    
      <div class="form">
        <form id="register-form" action="#">
