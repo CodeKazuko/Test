@@ -31,6 +31,24 @@ const RegisterScreen = {
   },
   render: () => `
           <script type="text/javascript"> 
+
+          function matchTest() {
+            let pass = password.value
+            let confirmPass = repeatPassword.value
+        
+            if (pass !== confirmPass) {
+              console.log("Password don't match. Please try again.")
+              return false
+            } else {
+              console.log("Password match")
+            }
+          }
+        
+          repeatPassword.addEventListener("keyup", (e) => {
+            matchTest()
+            })
+          }
+          
           window.onload = function() {
             let email = document.getElementById("email")
             let password = document.getElementById("password")
@@ -69,22 +87,7 @@ const RegisterScreen = {
               }
             });
           
-            function matchTest() {
-              let pass = password.value
-              let confirmPass = repeatPassword.value
-          
-              if (pass !== confirmPass) {
-                console.log("Password don't match. Please try again.")
-                return false
-              } else {
-                console.log("Password match")
-              }
-            }
-          
-            repeatPassword.addEventListener("keyup", (e) => {
-              matchTest()
-              })
-            }
+            
         </script>    
      <div class="form">
        <form id="register-form" action="#">
