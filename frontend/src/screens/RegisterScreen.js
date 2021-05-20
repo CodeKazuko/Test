@@ -121,6 +121,6 @@ const RegisterScreen = {
             </li>
           </ul>
         </form>
-    </div>`,
+      </div>`,
 }
 export default RegisterScreen
