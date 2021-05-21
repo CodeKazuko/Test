@@ -97,12 +97,12 @@ const RegisterScreen = {
             <li>
               <label for="email" class="emailBox">Email</label>
               <input type="email" name="email" id="email" required />
-              <span class="emailText"></span>
+              <span class="emailText" color="black"></span>
             </li>
             <li>
               <label for="password" class="passBox">Password</label>
               <input type="password" id="password" name="password" class="password" required />
-              <span class="passText"></span>
+              <span class="passText" color="black"></span>
             </li>
             <li>
               <label for="re-password">Re-Enter Password</label>
