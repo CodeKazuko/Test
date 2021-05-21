@@ -102,7 +102,7 @@ const RegisterScreen = {
             <li>
               <label for="password" class="passBox">Password</label>
               <input type="password" id="password" name="password" class="password" required />
-              <span class="passText" color="black" ></span>
+              <span class="passText" color="black"></span>
             </li>
             <li>
               <label for="re-password">Re-Enter Password</label>
