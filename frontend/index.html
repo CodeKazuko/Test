@@ -20,17 +20,6 @@
       <footer id="footer_container"></footer>
     </div>
     <script src="/main.js"></script>
-    
-    <script type= "text/javascript">
-      function textOnly(){
-      let str = document.getElementById("q").value
-      if(!(/^[a-zA-Z]+$/.test(str))){
-        // stopping user from typing numbers and special character for products 
-        document.getElementById('q').value = ""
-        alert("Stop typing numbers and special character!")
-        document.getElementById('q').value = ""
-      } 
-    }
-    </script>
+    <script src="protectsearch.js"></script> 
   </body>
 </html>
