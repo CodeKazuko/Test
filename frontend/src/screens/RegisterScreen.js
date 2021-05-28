@@ -17,13 +17,14 @@ const RegisterScreen = {
         showLoading()
         const data = await register({
           name: document.getElementById('name').value,
-          email: document.getElementById('email').value.normalizeEmail(),
-          password: document.getElementById('password').value.trim(),
+          email: document.getElementById('email').value,
+          password: document.getElementById('password').value,
         })
         hideLoading()
         if (data.error) {
           showMessage(data.error)
-        } else {
+        }
+         else {
           setUserInfo(data)
           redirectUser()
         }
