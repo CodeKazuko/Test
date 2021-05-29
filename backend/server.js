@@ -3,6 +3,7 @@ import path from 'path'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import rateLimit from 'express-rate-limit'
+import helmet from 'helmet'
 import config from './config'
 import userRoute from './routes/userRoute'
 import uploadRoute from './routes/uploadRoute'
@@ -22,7 +23,7 @@ const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100
 })
-
+app.use(helmet())
 app.use(cors())
 app.use(express.json())
 app.use('/api/', apiLimiter)
