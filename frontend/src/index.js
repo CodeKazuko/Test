@@ -45,7 +45,7 @@ const apiLimiter = rateLimit({
   max: 500
 })
 
-router.use(apiLimiter)
+routes.use(apiLimiter)
 
 // Takes a URL, checks against the list of supported routes and then renders the corresponding main page.
 const router = async () => {
