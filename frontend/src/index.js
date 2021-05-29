@@ -1,4 +1,4 @@
-import rateLimit from 'express-rate-limit'
+
 import HomeScreen from './screens/HomeScreen.js'
 import AboutScreen from './screens/AboutScreen.js'
 import CartScreen from './screens/CartScreen.js'
@@ -40,13 +40,6 @@ const routes = {
   '/cart': CartScreen,
 };
 
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 500
-})
-
-
-
 // Takes a URL, checks against the list of supported routes and then renders the corresponding main page.
 const router = async () => {
   showLoading();
@@ -78,7 +71,6 @@ const router = async () => {
   main.innerHTML = await screen.render()
   await screen.after_render()
   hideLoading()
-  router.use(apiLimiter)
 }
 
 // Listen on hash change
