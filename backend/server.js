@@ -38,7 +38,8 @@ app.use('/uploads', express.static(path.join(__dirname, '/../uploads')))
 app.use(express.static(path.join(__dirname, '/../frontend')))
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../frontend/index.html`))
-}, limiter);
+})
+app.use(limiter)
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const status = err.name && err.name === 'ValidationError' ? 400 : 500
