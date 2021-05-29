@@ -1,3 +1,4 @@
+import rateLimit from 'express-rate-limit'
 import HomeScreen from './screens/HomeScreen.js'
 import AboutScreen from './screens/AboutScreen.js'
 import CartScreen from './screens/CartScreen.js'
@@ -18,6 +19,11 @@ import ProductListScreen from './screens/ProductListScreen.js'
 import ProductEditScreen from './screens/ProductEditScreen.js'
 import OrderListScreen from './screens/OrderListScreen.js'
 import DashboardScreen from './screens/DashboardScreen.js'
+
+const apiLimiter = rateLimit({
+  windowMs: 5 * 60 * 1000,
+  max: 10
+})
 
 // List of all routes
 const routes = {
@@ -66,7 +72,7 @@ const router = async () => {
     (request.verb ? `/${request.verb}` : '')
 
   // Get the page from our hash of supported routes and if parsed URL is not in list, select the 404 page
-  const screen = routes[parsedUrl] ? routes[parsedUrl] : Error404
+  const screen = routes[parsedUrl] ? routes[parsedUrl + apiLimiter] : Error404
   main.innerHTML = await screen.render()
   await screen.after_render()
   hideLoading()
