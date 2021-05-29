@@ -20,11 +20,6 @@ import ProductEditScreen from './screens/ProductEditScreen.js'
 import OrderListScreen from './screens/OrderListScreen.js'
 import DashboardScreen from './screens/DashboardScreen.js'
 
-const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100
-})
-
 // List of all routes
 const routes = {
   '/': HomeScreen,
@@ -72,14 +67,22 @@ const router = async () => {
     (request.verb ? `/${request.verb}` : '')
 
   // Get the page from our hash of supported routes and if parsed URL is not in list, select the 404 page
-  const screen = routes[parsedUrl] ? apiLimiter(routes[parsedUrl]) : Error404
+  const screen = routes[parsedUrl] ? routes[parsedUrl] : Error404
   main.innerHTML = await screen.render()
   await screen.after_render()
   hideLoading()
 }
+
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100
+})
+
+router.use(apiLimiter)
 
 // Listen on hash change
 window.addEventListener('hashchange', router)
 
 // Listen on page load
 window.addEventListener('load', router)
+
