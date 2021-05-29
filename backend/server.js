@@ -25,7 +25,7 @@ const apiLimiter = rateLimit({
 
 app.use(cors())
 app.use(express.json())
-
+app.use('/api/', apiLimiter)
 app.use('/api/users', userRoute)
 app.use('/api/uploads', uploadRoute)
 app.use('/api/products', productRoute)
@@ -33,7 +33,7 @@ app.use('/api/orders', orderRoute)
 app.get('/api/paypal/clientId', (req, res) => {
   res.send({ clientId: config.PAYPAL_CLIENT_ID })
 })
-app.use('/api/', apiLimiter)
+
 app.use('/uploads', express.static(path.join(__dirname, '/../uploads')))
 app.use(express.static(path.join(__dirname, '/../frontend')))
 app.get('*', (req, res) => {
