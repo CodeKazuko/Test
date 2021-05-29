@@ -21,8 +21,8 @@ import OrderListScreen from './screens/OrderListScreen.js'
 import DashboardScreen from './screens/DashboardScreen.js'
 
 const apiLimiter = rateLimit({
-  windowMs: 5 * 60 * 1000,
-  max: 10
+  windowMs: 15 * 60 * 1000,
+  max: 100
 })
 
 // List of all routes
