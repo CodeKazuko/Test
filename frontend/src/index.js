@@ -1,4 +1,3 @@
-
 import HomeScreen from './screens/HomeScreen.js'
 import AboutScreen from './screens/AboutScreen.js'
 import CartScreen from './screens/CartScreen.js'
