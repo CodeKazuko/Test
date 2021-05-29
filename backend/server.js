@@ -26,7 +26,7 @@ const limiter = rateLimit({
 })
 
 
-app.use(cors())
+app.use(cors(), limiter)
 app.use(express.json())
 app.use('/api/users', userRoute)
 app.use('/api/uploads', uploadRoute)
@@ -41,7 +41,7 @@ app.use(express.static(path.join(__dirname, '/../frontend')))
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../frontend/index.html`))
 })
-app.use(limiter)
+
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const status = err.name && err.name === 'ValidationError' ? 400 : 500
