@@ -16,18 +16,17 @@ mongoose.connect(mongodbUrl, {
     useCreateIndex: true,
   }).catch((error) => console.log(error.reason))
 
-
-  
 const app = express()
 
-const limiter = rateLimit({
+const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: 100
 })
 
 
-app.use(cors(), limiter)
+app.use(cors())
 app.use(express.json())
+app.use("/api/", apiLimiter)
 app.use('/api/users', userRoute)
 app.use('/api/uploads', uploadRoute)
 app.use('/api/products', productRoute)
@@ -39,7 +38,7 @@ app.get('/api/paypal/clientId', (req, res) => {
 app.use('/uploads', express.static(path.join(__dirname, '/../uploads')))
 app.use(express.static(path.join(__dirname, '/../frontend')))
 app.get('*', (req, res) => {
-  res.sendFile(path.join(`${__dirname}/../frontend/index.html`))
+  res.sendFile(path.join(`${__dirname}/../frontend/index.html`)) 
 })
 
 // eslint-disable-next-line no-unused-vars
