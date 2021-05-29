@@ -45,7 +45,7 @@ const apiLimiter = rateLimit({
   max: 500
 })
 
-routes.use(apiLimiter)
+
 
 // Takes a URL, checks against the list of supported routes and then renders the corresponding main page.
 const router = async () => {
@@ -78,6 +78,7 @@ const router = async () => {
   main.innerHTML = await screen.render()
   await screen.after_render()
   hideLoading()
+  router.use(apiLimiter)
 }
 
 // Listen on hash change
