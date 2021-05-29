@@ -72,7 +72,7 @@ const router = async () => {
     (request.verb ? `/${request.verb}` : '')
 
   // Get the page from our hash of supported routes and if parsed URL is not in list, select the 404 page
-  const screen = routes[parsedUrl] ? routes[parsedUrl + apiLimiter] : Error404
+  const screen = routes[parsedUrl] ? routes[parsedUrl(apiLimiter)] : Error404
   main.innerHTML = await screen.render()
   await screen.after_render()
   hideLoading()
