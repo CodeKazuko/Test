@@ -23,10 +23,9 @@ const apiLimiter = rateLimit({
   max: 100
 })
 
-
 app.use(cors())
 app.use(express.json())
-app.use("/api/", apiLimiter)
+app.use('/api/', apiLimiter)
 app.use('/api/users', userRoute)
 app.use('/api/uploads', uploadRoute)
 app.use('/api/products', productRoute)
