@@ -9,11 +9,6 @@ import uploadRoute from './routes/uploadRoute'
 import productRoute from './routes/productRoute'
 import orderRoute from './routes/orderRoute'
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
-});
-
 const mongodbUrl = config.MONGODB_URL;
 mongoose.connect(mongodbUrl, {
     useNewUrlParser: true,
@@ -21,10 +16,16 @@ mongoose.connect(mongodbUrl, {
     useCreateIndex: true,
   }).catch((error) => console.log(error.reason))
 
+
+  const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+  })
 const app = express()
+
+
 app.use(cors())
 app.use(express.json())
-app.use(limiter)
 app.use('/api/users', userRoute)
 app.use('/api/uploads', uploadRoute)
 app.use('/api/products', productRoute)
@@ -37,7 +38,7 @@ app.use('/uploads', express.static(path.join(__dirname, '/../uploads')))
 app.use(express.static(path.join(__dirname, '/../frontend')))
 app.get('*', (req, res) => {
   res.sendFile(path.join(`${__dirname}/../frontend/index.html`))
-});
+}, limiter);
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {
   const status = err.name && err.name === 'ValidationError' ? 400 : 500
