@@ -16,5 +16,6 @@ const DashboardMenu = {
       </div>
       `
   },
-};
-export default DashboardMenu;
+}
+
+export default DashboardMenu

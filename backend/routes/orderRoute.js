@@ -9,9 +9,7 @@ const router = express.Router()
 
 // showing the product is bought by which user
 router.get(
-  '/',
-  isAuth,
-  asyncHandler(async (req, res) => {
+  '/', isAuth, asyncHandler(async (req, res) => {
     const orders = await Order.find({}).populate('user')
     res.send(orders)
   })
@@ -19,8 +17,7 @@ router.get(
 
 
 router.get(
-  '/mine',
-  isAuth,
+  '/mine', isAuth,
   asyncHandler(async (req, res) => {
     const orders = await Order.find({ user: req.user._id })
     res.send(orders)
@@ -33,7 +30,6 @@ router.get(
   asyncHandler(async (req, res) => {
     // summary data of orders 
     const orders = await Order.aggregate([
-      
       {
         // not group by any specific field, calculate by number of records and /total sales
         $group: {
@@ -77,8 +73,7 @@ router.get(
 
 // finding a specific order
 router.get(
-  '/:id',
-  isAuth,
+  '/:id', isAuth,
   asyncHandler(async (req, res) => {
     const order = await Order.findOne({ _id: req.params.id })
     if (order) {
@@ -91,14 +86,12 @@ router.get(
 
 // deleting order
 router.delete(
-  '/:id',
-  isAuth,
-  isAdmin,
+  '/:id', isAuth, isAdmin,
   asyncHandler(async (req, res) => {
     const order = await Order.findOne({ _id: req.params.id })
     if (order) {
       const deletedOrder = await order.remove()
-      res.send(deletedOrder);
+      res.send(deletedOrder)
     } else {
       res.status(404).send('Order Not Found.')
     }
@@ -107,8 +100,7 @@ router.delete(
 
 // creating new order
 router.post(
-  '/',
-  isAuth,
+  '/', isAuth,
   asyncHandler(async (req, res) => {
     const newOrder = new Order({
       orderItems: req.body.orderItems,
@@ -127,8 +119,7 @@ router.post(
 
 // payment route
 router.put(
-  '/:id/pay',
-  isAuth,
+  '/:id/pay', isAuth, 
   asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id)
     if (order) {
@@ -152,9 +143,7 @@ router.put(
 
 // for changing to deliver status
 router.put(
-  '/:id/deliver',
-  isAuth,
-  isAdmin,
+  '/:id/deliver', isAuth, isAdmin,
   asyncHandler(async (req, res) => {
     const order = await Order.findById(req.params.id)
     if (order) {

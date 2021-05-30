@@ -18,7 +18,7 @@ export const getProducts = async ({ searchKeyword = '' }) => {
     if (response.statusText !== 'OK') {
       throw new Error(response.data.message)
     }
-    return response.data;
+    return response.data
   } catch (err) {
     console.log('Error in get products', err)
     return { error: err.message }
@@ -36,7 +36,7 @@ export const getSummary = async () => {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-    });
+    })
     if (response.statusText !== 'OK') {
       throw new Error(response.data.message)
     }
@@ -77,16 +77,16 @@ export const createProduct = async () => {
   }
   try {
     const response = await fetch(`${apiUrl}/api/products`, options)
-    const json = await response.json();
+    const json = await response.json()
     if (response.status !== 201) {
-      throw new Error(json.message);
+      throw new Error(json.message)
     }
     return json
   } catch (err) {
-    console.log('Error in create product', err.message);
+    console.log('Error in create product', err.message)
     return { error: err.message }
   }
-};
+}
 
 export const createReview = async (productId, review) => {
   const { token } = getUserInfo()
@@ -105,7 +105,7 @@ export const createReview = async (productId, review) => {
     if (response.status !== 201) {
       throw new Error(json.message)
     }
-    return json;
+    return json
   } catch (err) {
     console.log('Error in create review', err.message)
     return { error: err.message }
@@ -128,7 +128,7 @@ export const uploadProductImage = async (bodyFormData) => {
     }
     return json
   } catch (err) {
-    console.log('Error in upload image', err.message);
+    console.log('Error in upload image', err.message)
     return { error: err.message }
   }
 }
@@ -178,7 +178,7 @@ export const deleteProduct = async (productId) => {
     console.log('Error in delete product', err.message)
     return { error: err.message }
   }
-};
+}
 
 // Order API
 export const getOrder = async (id) => {
@@ -219,10 +219,10 @@ export const getMyOrders = async () => {
     }
     return json
   } catch (err) {
-    console.log('Error in get my orders', err);
+    console.log('Error in get my orders', err)
     return { error: err.message }
   }
-};
+}
 export const getOrders = async () => {
   const { token } = getUserInfo()
   const options = {
@@ -238,12 +238,12 @@ export const getOrders = async () => {
     if (response.status !== 200) {
       throw new Error(json.message)
     }
-    return json;
+    return json
   } catch (err) {
     console.log('Error in get orders', err)
     return { error: err.message }
   }
-};
+}
 export const createOrder = async (order) => {
   const { token } = getUserInfo()
   const options = {
@@ -306,7 +306,7 @@ export const deliverOrder = async (orderId) => {
     if (response.status !== 200) {
       throw new Error(json.message)
     }
-    return json;
+    return json
   } catch (err) {
     console.log('Error in deliver order', err.message)
     return { error: err.message }
@@ -366,15 +366,15 @@ export const register = async ({ name, email, password }) => {
     body: JSON.stringify({ name, email, password }),
   }
   try {
-    const response = await fetch(`${apiUrl}/api/users/register`, options);
-    const json = await response.json();
+    const response = await fetch(`${apiUrl}/api/users/register`, options)
+    const json = await response.json()
     if (response.status !== 201) {
-      throw new Error(json.message);
+      throw new Error(json.message)
     }
-    return json;
+    return json
   } catch (err) {
-    console.log('Error in register', err.message);
-    return { error: err.message };
+    console.log('Error in register', err.message)
+    return { error: err.message }
   }
 }
 
@@ -388,14 +388,14 @@ export const update = async ({ name, email, password }) => {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, email, password }),
-  };
+  }
   try {
     const response = await fetch(`${apiUrl}/api/users/${userId}`, options)
     const json = await response.json()
     if (response.status !== 200) {
       throw new Error(json.message)
     }
-    return json;
+    return json
   } catch (err) {
     console.log('Error in update user', err.message)
     return { error: err.message }

@@ -10,7 +10,7 @@ const PaymentScreen = {
       ).value
       setPayment({ paymentMethod })
       document.location.hash = '/placeorder'
-    });
+    })
   },
   render: () => `
       <div>

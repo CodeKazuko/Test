@@ -16,8 +16,8 @@ const OrderListScreen = {
           hideLoading()
           rerender(OrderListScreen)
         }
-      });
-    });
+      })
+    })
     const editButtons = document.getElementsByClassName('edit-button')
     Array.from(editButtons).forEach((editButton) => {
       editButton.addEventListener('click', () => {

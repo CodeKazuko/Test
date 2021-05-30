@@ -37,11 +37,11 @@ const routes = {
   '/order/:id': OrderScreen,
   '/cart/:id': CartScreen,
   '/cart': CartScreen,
-};
+}
 
 // Takes a URL, checks against the list of supported routes and then renders the corresponding main page.
 const router = async () => {
-  showLoading();
+  showLoading()
   // Lazy load view element:
   const header = document.getElementById('header_container')
   const aside = document.getElementById('aside_container')

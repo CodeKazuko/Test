@@ -8,7 +8,7 @@ const storage = multer.diskStorage({
   filename(req, file, cb) {
     cb(null, `${Date.now()}.jpg`)
   },
-});
+})
 
 const upload = multer({ storage })
 const router = express.Router()

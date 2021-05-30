@@ -1,8 +1,6 @@
 import { getUserInfo } from '../localStorage.js'
 import { parseRequestUrl } from '../utils.js'
 
-
-
 const Header = {
   render: async () => {
     const { value } = parseRequestUrl();
@@ -27,7 +25,7 @@ const Header = {
         `
   },
   after_render: async () => {
-    const { name, isAdmin } = getUserInfo();
+    const { name, isAdmin } = getUserInfo()
     if (name) {
       if (isAdmin) {
         document.getElementById('header-links').innerHTML = `
@@ -50,6 +48,6 @@ const Header = {
         document.getElementById('aside_container').classList.add('open')
       })
   },
-};
+}
 
-export default Header;
+export default Header

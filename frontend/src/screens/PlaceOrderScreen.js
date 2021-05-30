@@ -5,7 +5,7 @@ import { createOrder } from '../api.js'
 import { showLoading, hideLoading } from '../utils.js'
 
 const convertCartToOrder = () => {
-  const orderItems = getCartItems();
+  const orderItems = getCartItems()
   if (orderItems.length === 0) document.location.hash = '/cart'
   const shipping = getShipping()
   if (!shipping.address) document.location.hash = '/shipping'

@@ -8,7 +8,7 @@ const Error404 = {
                 </p>
               </div>
             </div>
-        `;
+        `
   },
   after_render: async () => {},
 }

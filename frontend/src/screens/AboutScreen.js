@@ -8,6 +8,6 @@ const AboutScreen = {
     return view
   },
   after_render: async () => {},
-};
+}
 
 export default AboutScreen

@@ -10,7 +10,7 @@ const ShippingScreen = {
         city: document.getElementById('city').value,
         postalCode: document.getElementById('postal-code').value,
         country: document.getElementById('country').value,
-      });
+      })
       document.location.hash = '/payment'
     })
   },

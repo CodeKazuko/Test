@@ -5,8 +5,8 @@ import { getUserInfo } from '../localStorage.js'
 let order = null
 
 const addPaypalSdk = async () => {
-  const clientID = await getPaypalClientID();
-  showLoading();
+  const clientID = await getPaypalClientID()
+  showLoading()
   if (!window.paypal) {
     const script = document.createElement('script')
     script.type = 'text/javascript'
@@ -17,7 +17,7 @@ const addPaypalSdk = async () => {
   } else {
     handlePayment(clientID)
   }
-};
+}
 const handlePayment = (clientID) => {
   window.paypal.Button.render(
     {
@@ -49,17 +49,17 @@ const handlePayment = (clientID) => {
               },
             },
           ],
-        });
+        })
       },
       // Execute the payment
       onAuthorize(data, actions) {
         return actions.payment.execute().then(async () => {
-          showLoading();
+          showLoading()
           await payOrder(order._id, {
             orderID: data.orderId,
             payerID: data.payerID,
             paymentID: data.paymentID,
-          });
+          })
           hideLoading()
           showMessage('Payment Was Successfully.', () => {
             rerender(OrderScreen)

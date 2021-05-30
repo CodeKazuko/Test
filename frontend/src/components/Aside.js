@@ -25,8 +25,8 @@ const Aside = {
     document.getElementById('aside_container').classList.remove('open')
     document.getElementById('aside-close-button').addEventListener('click', async () => {
         document.getElementById('aside_container').classList.remove('open')
-      });
+      })
   },
-};
+}
 
-export default Aside;
+export default Aside

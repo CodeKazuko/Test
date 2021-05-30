@@ -7,7 +7,7 @@ const ProfileScreen = {
     document.getElementById('logout-button').addEventListener('click', () => {
       cleanUser()
       document.location.href = '/'
-    });
+    })
     document.getElementById('profile-form').addEventListener('submit', 
     async (e) => {
         e.preventDefault()

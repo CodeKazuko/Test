@@ -3,12 +3,12 @@ import asyncHandler from 'express-async-handler'
 import Product from '../models/productModel'
 import { isAuth, isAdmin } from '../util'
 
-const router = express.Router();
+const router = express.Router()
 
 router.get(
   '/',
   asyncHandler(async (req, res) => {
-    const category = req.query.category ? { category: req.query.category } : {};
+    const category = req.query.category ? { category: req.query.category } : {}
     const searchKeyword = req.query.searchKeyword
       ? {
           name: {
@@ -21,7 +21,7 @@ router.get(
       ? req.query.sortOrder === 'lowest'
         ? { price: 1 }
         : { price: -1 }
-      : { _id: -1 };
+      : { _id: -1 }
     const products = await Product.find({ ...category, ...searchKeyword }).sort(
       sortOrder
     )
@@ -49,9 +49,7 @@ router.get(
 )
 
 router.put(
-  '/:id',
-  isAuth,
-  isAdmin,
+  '/:id', isAuth, isAdmin,
   asyncHandler(async (req, res) => {
     const productId = req.params.id
     const product = await Product.findById(productId)
@@ -74,9 +72,7 @@ router.put(
 )
 
 router.delete(
-  '/:id',
-  isAuth,
-  isAdmin,
+  '/:id', isAuth, isAdmin,
   asyncHandler(async (req, res) => {
     const deletedProduct = await Product.findById(req.params.id)
     if (deletedProduct) {
@@ -89,9 +85,7 @@ router.delete(
 )
 
 router.post(
-  '/',
-  isAuth,
-  isAdmin,
+  '/', isAuth, isAdmin,
   asyncHandler(async (req, res) => {
     const product = new Product({
       name: 'Sample Product',
@@ -109,9 +103,7 @@ router.post(
   })
 )
 router.post(
-  '/:id/reviews',
-  isAuth,
-  asyncHandler(async (req, res) => {
+  '/:id/reviews', isAuth, asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id)
     if (product) {
       const review = {
@@ -135,4 +127,5 @@ router.post(
     }
   })
 )
+
 export default router

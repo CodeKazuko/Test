@@ -9,7 +9,7 @@ const ProductScreen = {
     const request = parseRequestUrl()
     document.getElementById('add-button').addEventListener('click', () => {
       document.location.hash = `/cart/${request.id}`
-    });
+    })
     if (document.getElementById('review-form')) {
       document.getElementById('review-form').addEventListener('submit', 
       async (e) => {
@@ -18,7 +18,7 @@ const ProductScreen = {
           const data = await createReview(request.id, {
             comment: document.getElementById('comment').value,
             rating: document.getElementById('rating').value,
-          });
+          })
           hideLoading()
           if (data.error) {
             showMessage(data.error)

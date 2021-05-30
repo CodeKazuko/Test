@@ -18,7 +18,7 @@ const addToCart = (item, force = false) => {
   if (force) {
     rerender(CartScreen)
   }
-};
+}
 const removeFromCart = (id) => {
   setCartItems(getCartItems().filter((x) => x.product !== id))
   if (id === parseRequestUrl().id) {
@@ -26,7 +26,7 @@ const removeFromCart = (id) => {
   } else {
     rerender(CartScreen)
   }
-};
+}
 const CartScreen = {
   after_render: async () => {
     const qtySelects = document.getElementsByClassName('qty-select')
@@ -42,7 +42,7 @@ const CartScreen = {
         removeFromCart(deleteButton.id)
       })
     })
-    const checkoutButton = document.getElementById('checkout-button');
+    const checkoutButton = document.getElementById('checkout-button')
     checkoutButton.addEventListener('click', () => {
       document.location.hash = '/signin'
     })

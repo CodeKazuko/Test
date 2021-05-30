@@ -7,7 +7,7 @@ const SigninScreen = {
   after_render: () => {
     if (isLoggedIn()) {
       redirectUser()
-      return;
+      return
     }
 
     document.getElementById('signin-form').addEventListener('submit', 

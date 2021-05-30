@@ -3,7 +3,7 @@ import Chartist from 'chartist'
 import { getSummary } from '../api.js'
 import DashboardMenu from '../components/DashboardMenu'
 
-let summary = {};
+let summary = {}
 const DashboardScreen = {
   after_render: async () => {
     summary = await getSummary()
@@ -36,7 +36,7 @@ const DashboardScreen = {
         startAngle: 270,
         showLabel: true,
       }
-    );
+    )
   },
   render: async () => {
     summary = await getSummary()
