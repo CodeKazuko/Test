@@ -38,7 +38,7 @@ const ProductScreen = {
     return `
     <div>
       <div class="back-to-result">
-        <a href="/#">Back to result</a>
+        <a href="/#">Back to Home</a>
       </div>
       <div class="details">
            <div class="details-image">
@@ -69,7 +69,7 @@ const ProductScreen = {
             <div class="details-action">
               <ul>
                 <li>
-                  Price: ${product.price}
+                  Price: $${product.price}
                 </li>
                 <li>
                   Status:  
