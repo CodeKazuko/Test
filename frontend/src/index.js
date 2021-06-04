@@ -1,5 +1,6 @@
 import HomeScreen from './screens/HomeScreen.js'
 import AboutScreen from './screens/AboutScreen.js'
+import ContactUsScreen from './screens/ContactUsScreen'
 import CartScreen from './screens/CartScreen.js'
 import Error404 from './screens/Error404.js'
 import ProductScreen from './screens/ProductScreen.js'
@@ -23,6 +24,7 @@ import DashboardScreen from './screens/DashboardScreen.js'
 const routes = {
   '/': HomeScreen,
   '/about': AboutScreen,
+  '/contact': ContactUsScreen,
   '/signin': SigninScreen,
   '/register': RegisterScreen,
   '/profile': ProfileScreen,
