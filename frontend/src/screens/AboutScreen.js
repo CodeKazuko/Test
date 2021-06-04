@@ -1,6 +1,6 @@
 const AboutScreen = {
   render: async () => {
-    const view = /* html */ `
+    return `
             <section class="section">
                 <h1> About Us </h1>
                 <div class="wrapper">
@@ -10,7 +10,6 @@ const AboutScreen = {
                 </div>  
             </section>
         `
-    return view
   },
   after_render: async () => {},
 }
