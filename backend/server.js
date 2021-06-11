@@ -23,7 +23,9 @@ const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100
 })
-app.use(helmet())
+app.use(helmet({
+  contentSecurityPolicy: false,
+}))
 app.use(cors())
 app.use(express.json())
 app.use('/api/', apiLimiter)
