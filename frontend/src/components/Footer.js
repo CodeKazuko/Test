@@ -3,7 +3,7 @@ const Footer = {
     return `
     <footer class="footer">
       <div class="footer-left">
-        <img src="icon.png">
+        <img src="../img/icon.png">
       </div> 
       <div class="footer-right">
         <li class="features">
