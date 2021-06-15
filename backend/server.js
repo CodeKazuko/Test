@@ -19,16 +19,22 @@ mongoose.connect(mongodbUrl, {
 
 const app = express()
 
+// limit request
 const apiLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
   max: 100
 })
+
+// security measures
 app.use(helmet({
   contentSecurityPolicy: false,
+  dnsPrefetchControl: { allow: true }
 }))
 app.use(cors())
 app.use(express.json())
 app.use('/api/', apiLimiter)
+
+// for routes
 app.use('/api/users', userRoute)
 app.use('/api/uploads', uploadRoute)
 app.use('/api/products', productRoute)

@@ -3,9 +3,6 @@ const Footer = {
     return `
     <footer class="footer">
       <div class="footer-left">
-        <img src="../img/icon.png">
-      </div> 
-      <div class="footer-right">
         <li class="features">
            <h2>Useful Links</h2>
              <ul class="box">
