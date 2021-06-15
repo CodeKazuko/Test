@@ -27,8 +27,7 @@ const apiLimiter = rateLimit({
 
 // security measures
 app.use(helmet({
-  contentSecurityPolicy: false,
-  dnsPrefetchControl: { allow: true }
+  contentSecurityPolicy: false
 }))
 app.use(cors())
 app.use(express.json())
