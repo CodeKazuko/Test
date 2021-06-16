@@ -3,6 +3,7 @@ import path from 'path'
 import mongoose from 'mongoose'
 import cors from 'cors'
 import rateLimit from 'express-rate-limit'
+import helmet from 'helmet'
 import config from './config'
 import userRoute from './routes/userRoute'
 import uploadRoute from './routes/uploadRoute'
@@ -25,7 +26,10 @@ const apiLimiter = rateLimit({
 })
 
 // security measures
-
+app.use(helmet({
+  contentSecurityPolicy: false,
+  dnsPrefetchControl: { allow: true }
+}))
 app.use(cors())
 app.use(express.json())
 app.use('/api/', apiLimiter)
