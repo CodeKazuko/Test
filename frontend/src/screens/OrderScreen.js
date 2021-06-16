@@ -10,7 +10,7 @@ const addPaypalSdk = async () => {
   if (!window.paypal) {
     const script = document.createElement('script')
     script.type = 'text/javascript'
-    script.src = `https://www.paypal.com/sdk/js?client-id=AUGl0tRZYZ00SlfmqSibGKFNJYO0mLJSebg1euH-S_MTfhsX9xcm9FiCchKsoF6UMBO4XLVq-bDIla-g&disable-funding=credit,card`
+    script.src = `https://www.paypalobjects.com/api/checkout.js`
     script.async = true
     script.onload = () => handlePayment(clientID)
     document.body.appendChild(script)
@@ -18,39 +18,58 @@ const addPaypalSdk = async () => {
     handlePayment(clientID)
   }
 }
-const handlePayment = () => {
-  window.paypal.Buttons({
-    createOrder(data, actions) {
-      return actions.payment.create({
-        transactions: [
-          {
-            amount: {
-              total: order.totalPrice,
-              currency: 'SGD',
+const handlePayment = (clientID) => {
+  window.paypal.Button.render(
+    {
+      // Configure environment
+      env: 'sandbox',
+      client: {
+        sandbox: clientID,
+        production: '',
+      },
+      // Customize button 
+      locale: 'en_SG',
+      style: {
+        size: 'responsive',
+        color: 'gold',
+        shape: 'pill',
+      },
+
+      // Enable Pay Now checkout flow 
+      commit: true,
+
+      // Set up a payment
+      payment(data, actions) {
+        return actions.payment.create({
+          transactions: [
+            {
+              amount: {
+                total: order.totalPrice,
+                currency: 'SGD',
+              },
             },
-          },
-        ],
-      })
-    },
-    // eslint-disable-next-line func-names
-    onApprove: function(data, actions) {
-      // This function captures the funds from the transaction.
-      return actions.payment.execute().then(async () => {
-        showLoading()
-        await payOrder(
-          order._id, {
-          orderID: data.orderId,
-          payerID: data.payerID,
-          paymentID: data.paymentID,
+          ],
         })
-        hideLoading()
-        showMessage('Payment Was Successfully.', () => {
-          rerender(OrderScreen)
-           })
-      })
-    }.render('#paypal-button-container').then(() => {
+      },
+      // Execute the payment
+      onAuthorize(data, actions) {
+        return actions.payment.execute().then(async () => {
+          showLoading()
+          await payOrder(order._id, {
+            orderID: data.orderId,
+            payerID: data.payerID,
+            paymentID: data.paymentID,
+          })
+          hideLoading()
+          showMessage('Payment Was Successfully.', () => {
+            rerender(OrderScreen)
+          })
+        })
+      },
+    },
+    '#paypal-button'
+  ).then(() => {
     hideLoading()
-  })
   })
 }
 const OrderScreen = {
@@ -148,7 +167,7 @@ const OrderScreen = {
                 <div>$${order.totalPrice}</div>
               </li> 
               <li class="placeorder-actions-payment">
-                ${!order.isPaid ? `<div id="paypal-button-container"></div>` : ''}
+                ${!order.isPaid ? `<div id="paypal-button"></div>` : ''}
               </li>
               <li  >
                 ${
@@ -160,9 +179,7 @@ const OrderScreen = {
             </ul>
           </div>
         </div>
-      </div>
-      <script>paypal.Buttons().render('#paypal-button-container');</script>
-      `
+      </div>`
   },
 }
 
