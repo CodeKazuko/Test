@@ -1,15 +1,28 @@
 import {  parseRequestUrl, showLoading, hideLoading, rerender, showMessage} from '../utils.js'
-import { getOrder,  payOrder, deliverOrder } from '../api.js'
+import { getOrder, getPaypalClientID, payOrder, deliverOrder } from '../api.js'
 import { getUserInfo } from '../localStorage.js'
 
 let order = null
 
-
+const addPaypalSdk = async () => {
+  const clientID = await getPaypalClientID()
+  showLoading()
+  if (!window.paypal) {
+    const script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = `https://www.paypal.com/sdk/js?client-id=AUGl0tRZYZ00SlfmqSibGKFNJYO0mLJSebg1euH-S_MTfhsX9xcm9FiCchKsoF6UMBO4XLVq-bDIla-g&disable-funding=credit,card`
+    script.async = true
+    script.onload = () => handlePayment(clientID)
+    document.body.appendChild(script)
+  } else {
+    handlePayment(clientID)
+  }
+}
 const handlePayment = () => {
   window.paypal.Buttons({
     createOrder(data, actions) {
-      return actions.order.create({
-        purchase_units: [
+      return actions.payment.create({
+        transactions: [
           {
             amount: {
               total: order.totalPrice,
@@ -22,14 +35,13 @@ const handlePayment = () => {
     // eslint-disable-next-line func-names
     onApprove: function(data, actions) {
       // This function captures the funds from the transaction.
-      // eslint-disable-next-line func-names
-      return actions.order.capture().then(function(details) {
+      return actions.payment.execute().then(async () => {
         showLoading()
-        payOrder(
+        await payOrder(
           order._id, {
-          orderID: details.data.orderId,
-          payerID: details.data.payerID,
-          paymentID: details.data.paymentID,
+          orderID: data.orderId,
+          payerID: data.payerID,
+          paymentID: data.paymentID,
         })
         hideLoading()
         showMessage('Payment Was Successfully.', () => {
@@ -44,7 +56,7 @@ const handlePayment = () => {
 const OrderScreen = {
   after_render: async () => {
     if (!order.isPaid) {
-      handlePayment()
+      addPaypalSdk()
     }
     if (document.getElementById('deliver-order-button')) {
       document.getElementById('deliver-order-button').addEventListener('click', async () => {
@@ -149,8 +161,6 @@ const OrderScreen = {
           </div>
         </div>
       </div>
-      <script src="https://www.paypal.com/sdk/js?client-id=AUGl0tRZYZ00SlfmqSibGKFNJYO0mLJSebg1euH-S_MTfhsX9xcm9FiCchKsoF6UMBO4XLVq-bDIla-g&disable-funding=credit,card"> /
-    </script>
       <script>paypal.Buttons().render('#paypal-button-container');</script>
       `
   },
