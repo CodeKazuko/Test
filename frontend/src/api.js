@@ -116,9 +116,6 @@ export const uploadProductImage = async (bodyFormData) => {
   const options = {
     method: 'POST',
     body: bodyFormData,
-    headers: {
-      'Content-Type': 'multipart/form-data',
-    },
   }
   try {
     const response = await fetch(`${apiUrl}/api/uploads`, options)
